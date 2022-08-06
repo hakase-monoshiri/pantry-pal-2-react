@@ -1,6 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function SignUp() {
+
+
+  
+  function handleCallbackResponse (response) {
+    console.log(response.credential)
+  }
+
+  useEffect( () => {
+    /*global google */
+  
+    google.accounts.id.initialize( {
+      client_id: '429452142553-7v4pcin4pdukf5luem55l0s0o1i1linu.apps.googleusercontent.com',
+      callback: handleCallbackResponse
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById('signInDiv'),
+      {theme: 'outline', size: 'large'}
+    )
+  }, [] );
+
 
   const [state, setState] = useState({
     name: '',
@@ -59,12 +80,15 @@ export default function SignUp() {
             <input type="password" value={state.passwordConfirmation} name='passwordConfirmation' onChange={handleInput} />
           </label>
 
-          <p> Or Sign in with google:</p>
+        
 
           <input type='submit' value='Submit'></input>
 
 
         </form>
+
+        <p> Or Sign in with google:</p>
+        <div id='signInDiv'></div>
     </div>
   )
   
