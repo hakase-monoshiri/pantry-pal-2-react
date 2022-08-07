@@ -8,9 +8,9 @@ export const userSlice = createSlice({
 
   reducers: {
 
-    // login: (state, action) => {
-    //   state.user = action.payload
-    // },
+    login (state, action) {
+      state.user = action.payload
+    },
     
   }
 
@@ -19,4 +19,5 @@ export const userSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { login } = userSlice.actions
 
+// Export reducer as default
 export default userSlice.reducer

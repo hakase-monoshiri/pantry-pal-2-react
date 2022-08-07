@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { login } from '../redux/slices/userSlice';
 
 export default function SignUp() {
+
+  const dispatch = useDispatch()
 
 
   
@@ -36,13 +40,12 @@ export default function SignUp() {
     const value = e.target.value;
 
     setState( prevState => ({...prevState, [key]: value}) )
-    console.log(state)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(state)
+    dispatch(login(state))
    
   }
   
