@@ -9,7 +9,28 @@ export const userSlice = createSlice({
   reducers: {
 
     login (state, action) {
-      state.user = action.payload
+      console.log(action);
+      fetch(`${process.env.REACT_APP_API_URL}/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        },
+        body: JSON.stringify( { user: action.payload }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.error) {
+                console.log(data);
+                alert(data.error)
+            }
+            else {
+            localStorage.setItem("jwt", data.jwt);
+            console.log(data);
+            // save the user somewhere (in state!) to log the user in
+            state.user = data.user
+            }
+        });
     },
     
   }
